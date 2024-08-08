@@ -1,0 +1,86 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0" version="24.7.6">
+  <diagram name="Page-1" id="gDPHjHMdWqyITXLmRvqH">
+    <mxGraphModel dx="1426" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-26" value="" style="rounded=1;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="720" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bvrRIg4zGqpfxTe9OMGJ-17" target="bvrRIg4zGqpfxTe9OMGJ-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-44" value="Capture History" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bvrRIg4zGqpfxTe9OMGJ-43">
+          <mxGeometry x="-0.0469" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.95;exitY=0.961;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="bvrRIg4zGqpfxTe9OMGJ-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="550" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-50" value="Index new File" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bvrRIg4zGqpfxTe9OMGJ-49">
+          <mxGeometry x="-0.1798" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-17" value="Azure Function&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;" vertex="1" parent="1">
+          <mxGeometry x="340" y="310" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bvrRIg4zGqpfxTe9OMGJ-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="330" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="140" y="320" />
+              <mxPoint x="301" y="320" />
+              <mxPoint x="301" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-40" value="Search Query" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bvrRIg4zGqpfxTe9OMGJ-39">
+          <mxGeometry x="0.0601" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-18" value="Chat UI" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/preview/Static_Apps.svg;" vertex="1" parent="1">
+          <mxGeometry x="106" y="253" width="68" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.012;entryY=0.787;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bvrRIg4zGqpfxTe9OMGJ-20" target="bvrRIg4zGqpfxTe9OMGJ-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-37" value="OPENAPI file Added" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bvrRIg4zGqpfxTe9OMGJ-36">
+          <mxGeometry x="-0.1308" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-20" value="Storage Location" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/BlobBlock.svg;" vertex="1" parent="1">
+          <mxGeometry x="115" y="400" width="50" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-21" value="Cosmos SQL&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/databases/Azure_Cosmos_DB.svg;" vertex="1" parent="1">
+          <mxGeometry x="340" y="100" width="64" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-29" value="Resource Group" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/ResourceGroup.svg;" vertex="1" parent="1">
+          <mxGeometry x="56" y="50" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-46" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="302" width="180" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-19" value="AI Search" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/Search_Services.svg;" vertex="1" parent="1">
+          <mxGeometry x="566" y="312.44" width="68" height="49.120000000000005" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-30" value="Azure OpenAI" style="vsdxID=7;fillColor=#000000;gradientColor=none;shape=stencil(zVnbbtswDP2aPEaQRF2fu+4/gjVtg2VN4WRr+/ej4UgOKVvxgETYWyJLFH3Ew0PRK3g4vm7etystj6fu8HP7sXs6va7g20rr3dvrttud8NcKHlfw8Hzoti/d4ffb0/D/fdPP7H/9OvzpLXwO6yII6/pVWn4NI0aKYeD7MH/T/cCH3Xm+tgLCML/7ykNqGEk2lQBPbGoppD7PWW8+d8d1dzhtTrvD2/BcDs/2m+5lu8YN18/7zQt5dPzYbt+L4TkXnSpcBCA+OhCBuOhF8A099IWDRhMHETJNQVROxJYugi18lJ74CBnVNCUK1fScdXnOhp6zMPScbRDBtkTRlCg64mIQztBQjMJASxTLgwZ20E5o6iNy3IaWMJaEkZH4aEesE2Gk/K9QxHP1kXgYdM6mbVC8mrqd8JoGI+ah/ysYK5J1Fxf3u7d/EkwqsGVYooVzrp/EQAURHcUAh7wlGBgQytJQimNeuQ0Iah4E3N5TEEJIgTO5gGc4L5SfhwB1JVIEIKtRMoiRQj3wRoC6KQCVKCi3Ny4lpMkF6J2mxLJSxDCPgRTAxG0cGW0CEzclbiu/lRgod8cRG+ffSGGEsvyDgR0CeacaXRq81AK2Unork71LKDihTJ3eUNKbnqzSnN5Yr9rbRncFBdzeF9sHP78AQEhFUbDVJAe5uB0ZrmmFjjUH6BmbLRiucrX7lUegAlq5wKsU8HMMZ7WhLKpXmYNltJnn3D/Ny1yIpjSPBw11ijP9Vhf19nXKtAju64xlV+RcaaZQ1cLWQAj5nnbJcFr0I1KKMkajQjQT8HJ7E9LRzRGWZS3IUnP2X/KkgQoX7ljdsli1XI6cEdHML8D8EmgcuChC5Vxlri8u+MpTlp0z2eJQXS4Bx8uuqjRzZhSZldsT4X/j62nlna6Tj5IV71hAF2BguzC/gTXpcd4BE0SlkkMp1Iy5MTUilldy9Np1oe6FzQYgY1aPFAPDta4MHKZdfeBQNgTFcwwKeLsUV26P1bGp6DEUHS/g51SLrgY5bkFwUzYELxh7XGrETmPmBdV7yPecaS74nEBGFZOVwJms+1jNU9wtR5sNMIaYKpyMQUhNzYULdEiRNJMPOAZypEW2yep/tJn7Xfe/BcXcQR97z9WexZK6rwxGmwS6RTq4SgVKHVQBYGIKqfSe3EBb9kUBuWkqTQ6Z7V/IAkWsb4cZbvPG3bgKZOX2yMQrF/yyc8WiwLpcFOY2bcN6ArfXxfa+drV1WeoSCDoJ+pyMFCmOXeugaJ30jdhmMrIgtBkXIr/eG0hnNo2yLJKoTxlt4eX5yg7lAlvRqd4fdpnXKQ4WJvWa+QX44I/xE+zzbr8fvuBePuefbHFo+NwLj38B);strokeColor=none;strokeWidth=17;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="650" y="307" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.006;entryY=0.388;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bvrRIg4zGqpfxTe9OMGJ-17" target="bvrRIg4zGqpfxTe9OMGJ-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bvrRIg4zGqpfxTe9OMGJ-52" value="Execute search" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bvrRIg4zGqpfxTe9OMGJ-51">
+          <mxGeometry x="0.1322" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
