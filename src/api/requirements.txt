@@ -2,11 +2,12 @@
 # The Python Worker is managed by Azure Functions platform
 # Manually managing azure-functions-worker may cause unexpected issues
 
+azure-cosmos
 azure-functions
-langchain_openai
-langchain_community
-flask
-azure-search-documents
 azure.identity
-python-dotenv
+azure-search-documents
 azurefunctions.extensions.bindings.blob
+flask
+langchain_community
+langchain_openai
+python-dotenv

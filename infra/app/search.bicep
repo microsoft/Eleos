@@ -1,38 +1,44 @@
-param name string
+param suffix string
 param location string = resourceGroup().location
 param tags object = {}
-param searchServiceSkuName string = ''
 
-param keyVaultName string
-param searchEndpointStringKey string = 'AZURE-SEARCH-ENDPOINT'
-param searchKeyStringKey string = 'AZURE-SEARCH-KEY'
-param indexes array = []
-param principalId string
-
-module searchService '../core/search/search-services.bicep' = {
-  name: 'search-service'
-  params: {
-    name: name
-    location: location
-    tags: tags
-    keyVaultName: keyVaultName
-    searchEndpointStringKey: searchEndpointStringKey
-    searchKeyStringKey: searchKeyStringKey
+resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
+  name: 'search-${suffix}'
+  location: location
+  tags: tags
+  identity: {type:'SystemAssigned'}
+  sku: {
+    name: 'standard'
+  }
+  properties: {
     authOptions: {
       aadOrApiKey: {
         aadAuthFailureMode: 'http401WithBearerChallenge'
       }
     }
-    sku: {
-      name: !empty(searchServiceSkuName) ? searchServiceSkuName : 'standard'
+    disableLocalAuth: false
+    disabledDataExfiltrationOptions: []
+    encryptionWithCmk: {
+      enforcement: 'Unspecified'
     }
+    hostingMode: 'default'
+    networkRuleSet: {
+      bypass: 'None'
+      ipRules: []
+    }
+    partitionCount: 1
+    publicNetworkAccess: 'enabled'
+    replicaCount: 1
     semanticSearch: 'free'
-    principalId: principalId // this should be the user
-    indexes: indexes
   }
 }
 
-output indexes array = indexes
-output id string = searchService.outputs.id
-output name string = searchService.outputs.name
-output endpoint string = searchService.outputs.endpoint
+var indexName = 'swagger-docs-index'
+
+// todo: upsert index definition here
+
+output id string = search.id
+output endpoint string = 'https://${search.name}.search.windows.net/'
+output name string = search.name
+output indexName string = indexName
+output principalId string = search.identity.principalId

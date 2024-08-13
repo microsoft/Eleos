@@ -1,0 +1,192 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Hospital Patient API",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3000/HospitalService",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "OAuth": []
+        }
+    ],
+    "paths": {
+        "/patients-api/v1/admit": {
+            "post": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Admit a new patient",
+                "description": "Admit a new patient to the hospital.",
+                "operationId": "admitPatient",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "correlationId",
+                        "in": "header",
+                        "description": "A required UUID used to audit the service-call-chain related to a given request. Must conform to UUID format.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "callingApplication",
+                        "in": "header",
+                        "description": "The required name of the client application making the request.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientAdmitRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Patient admitted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientAdmitResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/patients-api/v1/status": {
+            "get": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Get patient status",
+                "description": "Retrieve the status of an existing patient.",
+                "operationId": "getPatientStatus",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "patientId",
+                        "in": "query",
+                        "description": "The ID of the patient to retrieve the status for.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient status retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PatientAdmitRequest": {
+                "type": "object",
+                "properties": {
+                    "patientId": {
+                        "type": "string",
+                        "description": "Unique identifier for the patient"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the patient"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "description": "Age of the patient"
+                    },
+                    "admissionDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Date of admission"
+                    },
+                    "condition": {
+                        "type": "string",
+                        "description": "Medical condition of the patient"
+                    }
+                },
+                "required": [
+                    "patientId",
+                    "name",
+                    "age",
+                    "admissionDate",
+                    "condition"
+                ]
+            },
+            "PatientAdmitResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status of the admission"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Response message"
+                    }
+                }
+            },
+            "PatientStatusResponse": {
+                "type": "object",
+                "properties": {
+                    "patientId": {
+                        "type": "string",
+                        "description": "Unique identifier for the patient"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Current status of the patient"
+                    },
+                    "lastUpdated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Last updated timestamp"
+                    }
+                }
+            }
+        }
+    }
+}

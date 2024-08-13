@@ -1,0 +1,210 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Healthcare API",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3000/HealthcareService",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "OAuth": []
+        }
+    ],
+    "paths": {
+        "/appointments-api/v1/book": {
+            "post": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Book a new appointment",
+                "description": "Book a new appointment for a patient.",
+                "operationId": "bookAppointment",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "correlationId",
+                        "in": "header",
+                        "description": "A required UUID used to audit the service-call-chain related to a given request. Must conform to UUID format.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "callingApplication",
+                        "in": "header",
+                        "description": "The required name of the client application making the request.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppointmentRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Appointment booked successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/medical-records-api/v1/patient/{patientId}": {
+            "get": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Get patient medical records",
+                "description": "Retrieve the medical records of a patient.",
+                "operationId": "getMedicalRecords",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "patientId",
+                        "in": "path",
+                        "description": "The ID of the patient to retrieve medical records for.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Medical records retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MedicalRecordsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AppointmentRequest": {
+                "type": "object",
+                "properties": {
+                    "patientId": {
+                        "type": "string",
+                        "description": "Unique identifier for the patient"
+                    },
+                    "doctorId": {
+                        "type": "string",
+                        "description": "Unique identifier for the doctor"
+                    },
+                    "appointmentDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date and time of the appointment"
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Reason for the appointment"
+                    }
+                },
+                "required": [
+                    "patientId",
+                    "doctorId",
+                    "appointmentDate",
+                    "reason"
+                ]
+            },
+            "AppointmentResponse": {
+                "type": "object",
+                "properties": {
+                    "appointmentId": {
+                        "type": "string",
+                        "description": "Unique identifier for the appointment"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status of the appointment"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Response message"
+                    }
+                }
+            },
+            "MedicalRecordsResponse": {
+                "type": "object",
+                "properties": {
+                    "patientId": {
+                        "type": "string",
+                        "description": "Unique identifier for the patient"
+                    },
+                    "records": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MedicalRecord"
+                        }
+                    }
+                }
+            },
+            "MedicalRecord": {
+                "type": "object",
+                "properties": {
+                    "recordId": {
+                        "type": "string",
+                        "description": "Unique identifier for the medical record"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date of the medical record"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the medical record"
+                    },
+                    "doctorId": {
+                        "type": "string",
+                        "description": "Unique identifier for the doctor"
+                    }
+                }
+            }
+        }
+    }
+}
