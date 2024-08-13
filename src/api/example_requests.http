@@ -1,8 +1,32 @@
-POST http://localhost:3100/api/chat-post HTTP/1.1
+POST http://localhost:7071/api/chat-post HTTP/1.1
 Content-Type: application/json
 
 {
-    "messages": "Hello, World!"
+    "messages": "I need an API that can help me send a message to a patient.",
+    "session_id": "1234",
+    "user_id": "5678"
 }
+###
+POST http://localhost:7071/api/chat-post HTTP/1.1
+Content-Type: application/json
 
+{
+    "messages": "What parameter do I need to make that call?"
+}
+###
+
+POST http://localhost:7071/api/chat-post HTTP/1.1
+Content-Type: application/json
+
+{
+    "messages": "What other endpoints can I use?"
+}
+###
+
+POST http://localhost:7071/api/chat-post HTTP/1.1
+Content-Type: application/json
+
+{
+    "messages": "What does the response look like for the sendMessage call?"
+}
 ###

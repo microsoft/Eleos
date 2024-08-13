@@ -1,17 +1,21 @@
-param name string
+metadata description = 'Creates an Azure Static Web Apps instance.'
+
+param suffix string
 param location string = resourceGroup().location
 param tags object = {}
 
-param serviceName string = 'web'
-
-module web '../core/host/staticwebapp.bicep' = {
-  name: '${serviceName}-staticwebapp-module'
-  params: {
-    name: name
-    location: location
-    tags: union(tags, { 'azd-service-name': serviceName })
+resource web 'Microsoft.Web/staticSites@2022-03-01' = {
+  name: 'swa-${suffix}'
+  location: location
+  tags: union(tags, { 'azd-service-name': 'web' })
+  sku: {
+    name: 'Free'
+    tier: 'Free'
+  }
+  properties: {
+    provider: 'Custom'
   }
 }
 
-output SERVICE_WEB_NAME string = web.outputs.name
-output SERVICE_WEB_URI string = web.outputs.uri
+output SERVICE_WEB_NAME string = web.name
+output SERVICE_WEB_URI string = 'https://${web.properties.defaultHostname}'

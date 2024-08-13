@@ -12,9 +12,9 @@ from langchain_text_splitters import CharacterTextSplitter
 indextrigger = func.Blueprint()
 
 
-
-@indextrigger.blob_trigger(arg_name="myblob", path="openapi",
-                               connection="langchainopenapi_STORAGE") 
+# can container be retrieved from the environment variable?
+@indextrigger.blob_trigger(arg_name="myblob", path="%AZURE_BLOB_STORAGE_INPUT_CONTAINER%",
+                               connection="AZURE_BLOB_CONN_STR") 
 def IndexingTrigger(myblob: func.InputStream):
     logging.info(f"Python blob trigger function processed blob"
                 f"Name: {myblob.name}"
@@ -50,7 +50,7 @@ def IndexingTrigger(myblob: func.InputStream):
     vector_store.add_documents(documents=docs)
 
     # Get the destination blob client
-    destination_blob_client = blob_service_client.get_blob_client(container="processed", blob=filename[1])
+    destination_blob_client = blob_service_client.get_blob_client(container=config.output_container_name, blob=filename[1])
 
     # Copy the blob to the new location
     destination_blob_client.start_copy_from_url(myblob.uri)

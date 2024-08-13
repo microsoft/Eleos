@@ -1,41 +1,55 @@
-param accountName string
+metadata description = 'Creates an Azure Cosmos DB for NoSQL account with a database.'
+
+param suffix string
 param location string = resourceGroup().location
 param tags object = {}
 
-param containers array = []
-param databaseName string = ''
-param principalIds array = []
-param keyVaultName string
-
-// Because databaseName is optional in main.bicep, we make sure the database name is set here.
-var defaultDatabaseName = 'chathistorydb'
-var actualDatabaseName = !empty(databaseName) ? databaseName : defaultDatabaseName
-
-// Because containers is optional in main.bicep, we make sure that a default container is set here
-var defaultContainerName = 'chatmessages'
-var actualContainers = !empty(containers) ? containers : [defaultContainerName]
-
-module cosmos '../core/database/cosmos/sql/cosmos-sql-db.bicep' = {
-  name: 'cosmos-sql'
-  params: {
-    accountName: accountName
-    databaseName: actualDatabaseName
-    containers: [for containerName in actualContainers: {
-        name: containerName
-        id: containerName
-        partitionKey: '/partitionkey'// should this be something else?
+resource account 'Microsoft.DocumentDB/databaseAccounts@2023-11-15' = {
+  name: 'cosmos-${suffix}'
+  kind: 'GlobalDocumentDB'
+  location: location
+  tags: tags
+  properties: {
+    consistencyPolicy: { defaultConsistencyLevel: 'Session' }
+    locations: [
+      {
+        locationName: location
+        failoverPriority: 0
+        isZoneRedundant: false
       }
     ]
-    location: location
-    principalIds: principalIds
-    keyVaultName: keyVaultName
-    tags: tags
+    databaseAccountOfferType: 'Standard'
+    enableAutomaticFailover: false
+    enableMultipleWriteLocations: false
+    apiProperties: {}
+    capabilities: [{ name: 'EnableServerless' }]
+    minimalTlsVersion: 'Tls12'
   }
 }
 
-metadata description = 'Creates an Azure Cosmos DB for NoSQL account with a database.'
+var databaseName = 'chathistorydb'
+resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-05-15' = {
+  name: databaseName
+  parent: account
+  properties: {
+    resource: { id: databaseName }
+  }
+}
 
-output connectionStringKey string = cosmos.outputs.connectionStringKey
-output databaseName string = cosmos.outputs.databaseName
-output endpoint string = cosmos.outputs.endpoint
-output containers array = actualContainers
+var containerName = 'chatmessages'
+resource container 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-05-15' = {
+  name: containerName
+  parent: database
+  properties: {
+    resource: {
+      id: containerName
+      partitionKey: { paths: ['/user_id'] }
+    }
+    options: {}
+  }
+}
+
+output name string = account.name
+output endpoint string = account.properties.documentEndpoint
+output databaseName string = database.name
+output containerName string = container.name

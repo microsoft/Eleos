@@ -1,0 +1,192 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Claim API",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3000/ClaimService",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "OAuth": []
+        }
+    ],
+    "paths": {
+        "/claims-api/v1/submit": {
+            "post": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Submit a new claim",
+                "description": "Submit a new insurance claim.",
+                "operationId": "submitClaim",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "correlationId",
+                        "in": "header",
+                        "description": "A required UUID used to audit the service-call-chain related to a given request. Must conform to UUID format.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "callingApplication",
+                        "in": "header",
+                        "description": "The required name of the client application making the request.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClaimRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Claim submitted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClaimResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/claims-api/v1/status": {
+            "get": {
+                "tags": [
+                    "v1"
+                ],
+                "summary": "Get claim status",
+                "description": "Retrieve the status of an existing claim.",
+                "operationId": "getClaimStatus",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token for authenticated users",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "claimId",
+                        "in": "query",
+                        "description": "The ID of the claim to retrieve the status for.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Claim status retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClaimStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ClaimRequest": {
+                "type": "object",
+                "properties": {
+                    "claimId": {
+                        "type": "string",
+                        "description": "Unique identifier for the claim"
+                    },
+                    "policyNumber": {
+                        "type": "string",
+                        "description": "Policy number associated with the claim"
+                    },
+                    "claimAmount": {
+                        "type": "number",
+                        "description": "Amount claimed"
+                    },
+                    "claimDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Date of the claim"
+                    },
+                    "claimDescription": {
+                        "type": "string",
+                        "description": "Description of the claim"
+                    }
+                },
+                "required": [
+                    "claimId",
+                    "policyNumber",
+                    "claimAmount",
+                    "claimDate",
+                    "claimDescription"
+                ]
+            },
+            "ClaimResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status of the claim"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Response message"
+                    }
+                }
+            },
+            "ClaimStatusResponse": {
+                "type": "object",
+                "properties": {
+                    "claimId": {
+                        "type": "string",
+                        "description": "Unique identifier for the claim"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Current status of the claim"
+                    },
+                    "lastUpdated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Last updated timestamp"
+                    }
+                }
+            }
+        }
+    }
+}
